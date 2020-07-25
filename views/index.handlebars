@@ -1,0 +1,42 @@
+<h1>Throw the Pitch</h1>
+
+<ul>
+  {{#each pitches}}
+  <li>
+    <p>
+      {{this.id}}. {{this.pitch_type}}
+
+      <button data-planid="{{this.id}}" class="delplan">Delete Pitches!</button>
+    </p>
+  </li>
+  {{/each}}
+</ul>
+
+<h2>Create a Plan</h2>
+<form id="createplan" class="button-size">
+  <textarea id="content" type="text" name="plan"></textarea>
+  <button type="submit">Save Plan!</button>
+</form>
+
+<h2>Update a Plan</h2>
+<form id="updateplan" class="button-size">
+  <select name="id">
+		{{#each pitches}}
+			<option value="{{this.id}}">{{this.pitch_type}}</option>
+		{{/each}}
+	</select>
+  <textarea type="text" name="pitch_type" placeholder="pitch_type"></textarea>
+  <button type="submit">Update Pitch!</button>
+</form>
+
+<script type="text/javascript">
+  $(".delplan").on("click", function(event) {
+    // Get the ID from the button.
+    // This is shorthand for $(this).attr("data-planid")
+    var id = $(this).data("planid");
+
+    // Send the DELETE request.
+    $.ajax("/api/pitches/" + id, {
+      type: "DELETE"
+    }).then(
+      function() {

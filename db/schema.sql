@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS day_planner_db;
+DROP DATABASE IF EXISTS baseball_db;
 
 CREATE DATABASE baseball_db;
 
