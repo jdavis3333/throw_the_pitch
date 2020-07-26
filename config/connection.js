@@ -13,6 +13,13 @@ if (process.env.JAWSDB_URL) {
   });  
 };
 
+// var connection = mysql.createConnection({
+//   host: "localhost",
+//   port: 3306,
+//   user: "root",
+//   password: "password",
+//   database: "baseball_db"
+// });
 
 connection.connect(function(err) {
   if (err) {
@@ -22,5 +29,5 @@ connection.connect(function(err) {
   console.log("connected as id " + connection.threadId);
 });
 
-connection.connect();
+// connection.connect();
 module.exports = connection;

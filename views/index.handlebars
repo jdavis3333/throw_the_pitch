@@ -1,42 +1,40 @@
-<h1>Throw the Pitch</h1>
+<h1>Throw the Pitch!</h1>
+
+<h2>Pitches Ready to Throw!</h2>
 
 <ul>
   {{#each pitches}}
-  <li>
-    <p>
-      {{this.id}}. {{this.pitch_type}}
-
-      <button data-planid="{{this.id}}" class="delplan">Delete Pitches!</button>
-    </p>
-  </li>
+    {{#unless thrown}}
+      {{> baseball/baseball-block thrown=false}}
+      {{!-- {{this.pitch_type}} --}}
+    {{/unless}}
   {{/each}}
 </ul>
 
-<h2>Create a Plan</h2>
-<form id="createplan" class="button-size">
-  <textarea id="content" type="text" name="plan"></textarea>
-  <button type="submit">Save Plan!</button>
+<h2>Pitches Thrown!</h2>
+
+<ul>
+  {{#each pitches}}
+    {{#if thrown}}
+    {{!-- {{this.pitch_type}} --}}
+      {{> baseball/baseball-block2 thrown=true}}
+    {{/if}}
+  {{/each}}
+</ul>
+
+<h2>Add a new pitch</h2>
+<form class="create-form">
+
+  <div class="form-group">
+    <label for="ca">Pitch Name:</label>
+    <input type="text" id="ca" name="name">
+  </div>
+
+  <div class="form-group">
+    <label for="slee">throw?</label><br>
+    <input type="radio" name="throw" value="0" checked> Not Thrown<br>
+    <input type="radio" name="throw" value="1"> Thrown!
+  </div>
+
+  <button type="submit">Add Pitch</button>
 </form>
-
-<h2>Update a Plan</h2>
-<form id="updateplan" class="button-size">
-  <select name="id">
-		{{#each pitches}}
-			<option value="{{this.id}}">{{this.pitch_type}}</option>
-		{{/each}}
-	</select>
-  <textarea type="text" name="pitch_type" placeholder="pitch_type"></textarea>
-  <button type="submit">Update Pitch!</button>
-</form>
-
-<script type="text/javascript">
-  $(".delplan").on("click", function(event) {
-    // Get the ID from the button.
-    // This is shorthand for $(this).attr("data-planid")
-    var id = $(this).data("planid");
-
-    // Send the DELETE request.
-    $.ajax("/api/pitches/" + id, {
-      type: "DELETE"
-    }).then(
-      function() {

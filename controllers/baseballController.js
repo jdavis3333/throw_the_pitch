@@ -2,12 +2,12 @@ var express = require("express");
 
 var router = express.Router();
 
-// Import the model (cat.js) to use its database functions.
+// Import the model (baseball.js) to use its database functions.
 var pitch = require("../models/baseball.js");
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
-  pitch.all(function(data) {
+  pitch.selectAll(function(data) {
     var hbsObject = {
       pitches: data
     };
@@ -17,7 +17,7 @@ router.get("/", function(req, res) {
 });
 
 router.post("/api/pitches", function(req, res) {
-  pitch.create(["pitch_type", "thrown"], [req.body.pitch_type, req.body.thrown], function(result) {
+  pitch.insertOne(["pitch_type", "thrown"], [req.body.pitch_type, req.body.thrown], function(result) {
     // Send back the ID of the new quote
     res.json({ id: result.insertId });
   });
@@ -28,7 +28,7 @@ router.put("/api/ball/:id", function(req, res) {
 
   console.log("condition", condition);
 
-  pitch.update(
+  pitch.updateOne(
     {
       thrown: req.body.thrown
     },
