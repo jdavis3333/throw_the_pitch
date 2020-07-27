@@ -6,8 +6,8 @@ var router = express.Router();
 var pitch = require("../models/baseball.js");
 
 // Create all our routes and set up logic within those routes where required.
-router.get("/", function(req, res) {
-  pitch.selectAll(function(data) {
+router.get("/", function (req, res) {
+  pitch.selectAll(function (data) {
     var hbsObject = {
       pitches: data
     };
@@ -16,14 +16,14 @@ router.get("/", function(req, res) {
   });
 });
 
-router.post("/api/pitches", function(req, res) {
-  pitch.insertOne(["pitch_type", "thrown"], [req.body.pitch_type, req.body.thrown], function(result) {
+router.post("/api/pitches", function (req, res) {
+  pitch.insertOne(["pitch_type", "thrown"], [req.body.pitch_type, req.body.thrown], function (result) {
     // Send back the ID of the new quote
     res.json({ id: result.insertId });
   });
 });
 
-router.put("/api/ball/:id", function(req, res) {
+router.put("/api/ball/:id", function (req, res) {
   var condition = "id = " + req.params.id;
 
   console.log("condition", condition);
@@ -33,7 +33,7 @@ router.put("/api/ball/:id", function(req, res) {
       thrown: req.body.thrown
     },
     condition,
-    function(result) {
+    function (result) {
       if (result.changedRows === 0) {
         // If no rows were changed, then the ID must not exist, so 404
         return res.status(404).end();

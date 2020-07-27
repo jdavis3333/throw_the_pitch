@@ -1,29 +1,23 @@
 <div class="jumbotron bg-info text-center">
   <h1>Throw the Pitch!</h1>
 </div>
-
 <div class="container">
   <div class="row">
     <div class="col-md-12">
       <h2>Add a new pitch</h2>
       <form class="create-form">
-
         <div class="form-group">
           <label for="ca">Pitch Name:</label>
           <input type="text" id="ca" name="name">
         </div>
-
         <div class="form-group">
           <label for="slee">throw?</label><br>
           <input type="radio" name="throw" value="0" checked> Not Thrown<br>
           <input type="radio" name="throw" value="1"> Thrown!
         </div>
-
         <button type="submit">Add Pitch</button>
       </form>
-
     </div>
-
   </div>
   <div class="row">
     <div class="col-md-6">
@@ -33,7 +27,6 @@
         {{#each pitches}}
         {{#unless thrown}}
         {{> baseball/baseball-block thrown=false}}
-        {{!-- {{this.pitch_type}} --}}
         {{/unless}}
         {{/each}}
       </ul>
@@ -45,7 +38,6 @@
       <ul>
         {{#each pitches}}
         {{#if thrown}}
-        {{!-- {{this.pitch_type}} --}}
         {{> baseball/baseball-block2 thrown=true}}
         {{/if}}
         {{/each}}
@@ -54,7 +46,5 @@
     </div>
 
   </div>
-
-
 
 </div>

@@ -11,6 +11,5 @@ CREATE TABLE pitches
     thrown BOOLEAN DEFAULT false,
     createdAt TIMESTAMP NOT NULL,
 	PRIMARY KEY (id)
-
-
+)
 -- Heroku: CREATE DATABASE c3sso4uhdycxwe7n;
